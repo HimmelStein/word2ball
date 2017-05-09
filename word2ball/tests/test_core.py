@@ -37,7 +37,7 @@ class TestCore(unittest.TestCase):
         print("ball1", ball1)
         print("ball2", ball2)
         print(result)
-        assert False
+        assert result
 
     def test_make_disconnect(self):
         ball1 = np.array([0, 0, 3.0])
