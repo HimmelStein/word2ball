@@ -119,11 +119,12 @@ def create_hypernym_tree(vocFile, vocPickle, hyperFile):
     while len(wlst) > 1:
         print("level",level, "lens:", len(wlst), len(wlst1))
         for w in wlst:
-            for wsyn in pdic[w]:
-                w1 = wn.synset(wsyn)
+            if w in ['"']:
+                continue
+            for w1 in wn.synsets(w):
+                wsyn = w1.name()
                 for uw in map(lambda e1:e1[0], filter(lambda e:e[1] == 1, w1.hypernym_distances())):
                     if w == w1.name().split('.')[0] and w != uw.name().split('.')[0] \
-                            and uw.name().split('.')[0] in wlst \
                             and [wsyn, uw] not in hplst:
                         hplst.append([wsyn, uw])
                         hyperHandle.write("  ".join([wsyn, uw.name(), str(level)]) + "\n")
