@@ -3,6 +3,14 @@ import numpy as np
 from .qsr_util import get_qsr, dis_between_ball_centers
 
 
+def train_nballs():
+    """
+
+    :return:
+    """
+    pass
+
+
 def update_to_disconnected(ball1, ball2, lrate = 0.0005, epsilon = 0.1, min_radius = 0.1, max = 1000000):
     """
 
@@ -34,7 +42,7 @@ def update_to_disconnected(ball1, ball2, lrate = 0.0005, epsilon = 0.1, min_radi
     return np.append(new_center1, ball1[-1]), np.append(new_center2, ball2[-1]), qsr == 'disconnect'
 
 
-def update_to_part_of_by_dev(ball1, ball2, lrate = 0.0005, ratio = 100, max = 100000):
+def update_to_part_of_by_dev(ball1, ball2, lrate = 0.0005, ratio = 100, max = 1000000):
     """
 
     :param ball1:
