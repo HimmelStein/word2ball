@@ -3,10 +3,17 @@ import numpy as np
 from .qsr_util import get_qsr, dis_between_ball_centers
 
 
-def train_nballs():
+def train_nballs(p0, p1, psyn=[], pant=[], pns = []):
     """
 
-    :return:
+    :param p0: vec of word
+    :param p1: vec of uppercategroy of word
+    :param psyn: vec of synonmy of word
+    :param pant: vec of antonmy of word
+    :param pns: vec of words not related with word (negative example)
+    :return: % of psyn are in n-ball of p1
+             % of pant are in n-ball of p1
+             % of pns are not in n-ball of p1
     """
     pass
 
