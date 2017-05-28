@@ -30,6 +30,38 @@ def get_qsr(ball1, ball2):
     return 'unknown'
 
 
+def qsr_part_of_characteristic_function(ball1, ball2):
+    """
+    ball1, ball2 are vectors in the form of  alpha1, l1, r1 = ball1[:-2], ball1[-2], ball1[-1]
+    alpha1 is a unit point on the unit ball!
+    distance between the center points of ball1 and ball2 + radius of ball1 - radius of ball2
+    return <=0 ball1 part of ball2
+           > 0 ball1 not part of ball2
+
+    :param ball1:
+    :param ball2:
+    :return: R
+    """
+    alpha1, l1, r1 = ball1[:-2], ball1[-2], ball1[-1]
+    alpha2, l2, r2 = ball2[:-2], ball2[-2], ball2[-1]
+    return dis_between(np.multiply(l1, alpha1), np.multiply(l2, alpha2)) + r1 - r2
+
+def qsr_disconnect_characteristic_function(ball1, ball2):
+    """
+    ball1, ball2 are vectors in the form of  alpha1, l1, r1 = ball1[:-2], ball1[-2], ball1[-1]
+    alpha1 is a unit point on the unit ball!
+    distance between the center points of ball1 and ball2 + radius of ball1 - radius of ball2
+    return <=0 ball1 disconects from ball2
+           > 0 ball1 does not disconnect from ball2
+
+    :param ball1:
+    :param ball2:
+    :return: R
+    """
+    alpha1, l1, r1 = ball1[:-2], ball1[-2], ball1[-1]
+    alpha2, l2, r2 = ball2[:-2], ball2[-2], ball2[-1]
+    return r1 + r2 - dis_between(np.multiply(l1, alpha1), np.multiply(l2, alpha2))
+
 def circles(x, y, s, c='b', vmin=None, vmax=None, **kwargs):
     """
     Make a scatter of circles plot of x vs y, where x and y are sequence
