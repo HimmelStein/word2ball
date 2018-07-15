@@ -1,6 +1,3 @@
-# operations on one graph
-A Python library of operations on one graph
-
 # The Function
 
 A demo to show that normal backpropagation method fails to train word2ball embeddings.
