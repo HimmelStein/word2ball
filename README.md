@@ -36,7 +36,7 @@ communication = [np.cos(np.pi / 3 + np.pi / 50), np.sin(np.pi / 3 + np.pi / 50),
 event = [np.cos(np.pi / 3 - np.pi / 50), np.sin(np.pi / 3 - np.pi / 50), 10, 3]
 ```
 Each ball is represented by a list with four elements, ```[np.cos(x), np.sin(x), l, r]```,
-where ```x, l, r``` representing angular, length of the center vector, and the radius
+where ```x, l, r``` representing angle, length of the center vector, and the radius
 
 
 # Quick start
