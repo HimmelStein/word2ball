@@ -47,5 +47,6 @@ class TestCore(unittest.TestCase):
         print("ball2", ball2)
         assert result
 
+
 if __name__ == '__main__':
     unittest.main()

@@ -8,13 +8,7 @@ $ cd word2ball
 word2ball $ make init
 ```
 
-# Run test
+# Run demo
 ```
-word2ball $ make test
+word2ball $ make show
 ```
-
-# Generate documentation
-```
-word2ball $ ./make_docu
-```
-Documentation is located at docs/html/

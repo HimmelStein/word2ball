@@ -1,1 +1,1 @@
-from .word2ball import *
+from word2ball.energy_and_loss import training_balls

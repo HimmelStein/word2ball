@@ -1,5 +1,10 @@
 
 import numpy as np
+import matplotlib.pyplot as plt
+
+
+def cos_of_vec(u,w):
+    return np.dot(u,w)/vec_length(u)/vec_length(w)
 
 
 def vec_length(v):
@@ -9,8 +14,11 @@ def vec_length(v):
 def dis_between(v1, v2):
     return np.sqrt(np.dot(v1 - v2, v1 - v2))
 
+
 def dis_between_ball_centers(ball1, ball2):
-    return np.sqrt(np.dot(ball1[:-1] - ball2[:-1], ball1[:-1] - ball2[:-1]))
+    v1 = np.multiply(ball1[:2], ball1[-2])
+    v2 = np.multiply(ball2[:2], ball2[-2])
+    return dis_between(v1, v2)
 
 
 def get_qsr(ball1, ball2):
@@ -62,6 +70,7 @@ def qsr_disconnect_characteristic_function(ball1, ball2):
     alpha2, l2, r2 = ball2[:-2], ball2[-2], ball2[-1]
     return r1 + r2 - dis_between(np.multiply(l1, alpha1), np.multiply(l2, alpha2))
 
+
 def circles(x, y, s, c='b', vmin=None, vmax=None, **kwargs):
     """
     Make a scatter of circles plot of x vs y, where x and y are sequence
@@ -108,7 +117,7 @@ def circles(x, y, s, c='b', vmin=None, vmax=None, **kwargs):
     import matplotlib.pyplot as plt
     from matplotlib.patches import Circle
     from matplotlib.collections import PatchCollection
-
+    c0 = c
     if np.isscalar(c):
         kwargs.setdefault('color', c)
         c = None
@@ -125,13 +134,14 @@ def circles(x, y, s, c='b', vmin=None, vmax=None, **kwargs):
 
     ax = plt.gca()
     ax.add_collection(collection)
+    if 'label' in kwargs.keys():
+        ax.text(x,y, kwargs['label'], color = c0 )
+
     ax.autoscale_view()
     if c is not None:
         plt.sci(collection)
     return collection
 
-
-import matplotlib.pyplot as plt
 
 class DynamicUpdate():
     #Suppose we know the x range

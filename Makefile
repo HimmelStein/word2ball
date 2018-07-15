@@ -1,5 +1,4 @@
 init:
-	pip3 install -r requirements.txt
-	pip3 install .
+	conda install --yes --file requirements.txt
 test:
-	nosetests word2ball/tests
+	python main.py
