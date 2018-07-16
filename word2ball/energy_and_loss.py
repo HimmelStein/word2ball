@@ -1,5 +1,6 @@
 import numpy as np
 import collections
+import argparse
 import matplotlib.pyplot as plt
 import matplotlib.animation as anim
 import copy
@@ -345,7 +346,8 @@ def _get_spaced_colors(n):
     return [(int(i[:2], 16), int(i[2:4], 16), int(i[4:], 16)) for i in colors]
 
 
-def train_e2_2D_iDC_batch_without_animation(klst, wDic={}, func="part_of", negFunc="disconnect", rmin=0.1, Lshift=100, rate=0.1):
+def train_e2_2D_iDC_batch_without_animation(klst, wDic={}, func="part_of", negFunc="disconnect", rmin=0.1,
+                                            Lshift=100, rate=0.1):
     """
     iDC: consider implicity DC relations
     :param klst: a list of node knowledge
@@ -399,7 +401,7 @@ def train_e2_2D_iDC_batch_without_animation(klst, wDic={}, func="part_of", negFu
 
 
 def train_e2_2D_iDC_batch_animation(klst, wDic={}, func="part_of", negFunc="disconnect", rmin=0.1, Lshift=100, rate=0.1,
-                                    ):
+                                    restartTF = True):
     """
     iDC: consider implicity DC relations
     with animation
@@ -409,7 +411,6 @@ def train_e2_2D_iDC_batch_animation(klst, wDic={}, func="part_of", negFunc="disc
     :param rate:
     :return:
     """
-
     initDic = copy.deepcopy(wDic)
     lossLst = collections.deque(maxlen=5)
     iDCLst = get_implicit_DC_list(klst)
@@ -456,7 +457,7 @@ def train_e2_2D_iDC_batch_animation(klst, wDic={}, func="part_of", negFunc="disc
                         c = colList[j], alpha=0.5, edgecolor='none', label=ball)
                 j += 1
 
-        elif len(lossLst) > 2 and lossLst[-1] == lossLst[-2]:
+        elif len(lossLst) > 2 and lossLst[-1] == lossLst[-2] and restartTF:
             print('+++++ re-initialize +++++')
             plt.clf()
             wDic = copy.deepcopy(initDic)
@@ -583,11 +584,11 @@ def step_train_e2_XD_iDC_batch(klst, iklst = True,  wDic={}, func="part_of", neg
 
 
 def training_balls(klst=kw0+kw1, wDic=wDic, animate = True, d=2,   func="part_of", negFunc="disconnect", rmin=0.08,
-                   Lshift=100, rate=0.1,  step_train = True, step_train_klst = True):
+                   Lshift=100, rate=0.1,  step_train = True, step_train_klst = True, restart=True):
     if animate and d<=3:
         print('in train_e2_2D_iDC_batch_with_animation\n')
         train_e2_2D_iDC_batch_animation(klst, wDic=wDic, func=func, negFunc=negFunc,
-                                        rmin=rmin, Lshift=Lshift, rate=rate)
+                                        rmin=rmin, Lshift=Lshift, rate=rate, restartTF =restart)
     elif not animate and d<=3:
         print('in train_e2_2D_iDC_batch_without_animation\n')
         train_e2_2D_iDC_batch_without_animation(klst, wDic=wDic, func=func, negFunc=negFunc,
@@ -674,4 +675,8 @@ def save_balls_to_file(ballDic, outFile, d = 300):
 
 
 if __name__ == "__main__":
-    training_balls()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--restart', type=bool, default=True)
+    args = parser.parse_args()
+    restartTF = args.restart
+    training_balls(restart = restartTF)

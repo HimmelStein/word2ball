@@ -43,10 +43,22 @@ where ```x, l, r``` representing angle, length of the center vector, and the rad
 ```
 $ git clone https://github.com/Himmelstein/word2ball.git
 $ cd word2ball
-word2ball $ make init
+word2ball $ conda create --name myenv
+word2ball $ source activate myenv
+(myenv) word2ball $ make init
 ```
 
 # Run demo
 ```
-word2ball $ make show
+(myenv) word2ball $ make show
+```
+
+# Run python command line with  restart
+```
+(myenv) word2ball $ python3 main.py --restart 1
+```
+
+# Run python command line without  restart
+```
+(myenv) word2ball $ python3 main.py --restart 0
 ```
